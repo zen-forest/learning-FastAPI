@@ -8,7 +8,6 @@ async def read_book(book_id: int):
             "book_id" : book_id,
             "title" : "The Great Gatsby",
             "author": "F Scott Fitzgerald"
-
     }
 
 @app.get("/authors/{author_id}")
