@@ -1,6 +1,8 @@
+import item_router 
 from fastapi import FastAPI
 
 app = FastAPI()
+app.include_router(item_router.router)
 
 @app.get("/books/{book_id}")
 async def read_book(book_id: int):
