@@ -1,12 +1,10 @@
 from fastapi import APIRouter
+from .models import Book, BookResponse
 
-router = APIRouter()
+router = APIRouter(prefix="/books", tags=["books"])
 
-@router.get("/items/{item_id}")
-async def read_item(item_id: int):
-    return {"item_id": item_id}
 
-@router.get("/books/{book_id}")
+@router.get("/{book_id}")
 async def read_book(book_id: int):
     return {
             "book_id" : book_id,
@@ -14,15 +12,12 @@ async def read_book(book_id: int):
             "author": "F Scott Fitzgerald"
     }
 
-@router.get("/authors/{author_id}")
-async def read_author(author_id: int):
-    return {
-        "author_id": author_id,
-        "name": "Ernest Hemingway"
-    }
+@router.post("/")
+async def create_book(book: Book):
+    return book
 
 # Notice that the type hint is set to None, meaning it's not required
-@router.get("/books")
+@router.get("/", response_model= list[BookResponse])
 async def read_books(year: int = None):
     if year:
         return {
@@ -30,3 +25,11 @@ async def read_books(year: int = None):
                 "books": ["Book 1", "Book 2"]
         }
     return {"books": ["All Books"]}
+
+
+# @router.get("/authors/{author_id}")
+# async def read_author(author_id: int):
+#    return {
+#        "author_id": author_id,
+#        "name": "Ernest Hemingway"
+#    }

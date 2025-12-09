@@ -1,11 +1,11 @@
 meta {
-  name: Get book by ID
+  name: Create book
   type: http
-  seq: 2
+  seq: 3
 }
 
-get {
-  url: {{base_url}}/books/2
+post {
+  url: {{base_url}}/books/
   body: none
   auth: inherit
 }
